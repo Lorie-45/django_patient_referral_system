@@ -1,0 +1,44 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+        
+    <h1>Welcome, {{ username }}!</h1>
+    <h2>Doctor Appointment Statistics</h2>
+
+   
+    <div>
+        <canvas id="appointmentChart"></canvas>
+    </div>
+
+    <script>
+        
+        const doctorNames = {{ doctor_names|safe }};
+        const appointmentData = {{ appointment_data|safe }};
+
+        
+        const ctx = document.getElementById('appointmentChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar', 
+            data: {
+                labels: doctorNames, 
+                datasets: [{
+                    label: 'Number of Appointments',
+                    data: appointmentData,  
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',  
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,  
+                maintainAspectRatio: false,  
+                scales: {
+                    y: {
+                        beginAtZero: true  
+                    }
+                }
+            }
+        });
+    </script>
+
+{% endblock %}

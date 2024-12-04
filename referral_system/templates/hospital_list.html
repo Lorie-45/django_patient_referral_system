@@ -1,0 +1,29 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Hospital List</h2>
+    <a href="{% url 'hospital_create' %}" class="btn btn-primary mb-3">Add New Hospital</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hospital in hospitals %}
+            <tr>
+                <td>{{ hospital.name }}</td>
+                <td>{{ hospital.location }}</td>
+                <td>
+                    <a href="{% url 'hospital_update' hospital.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'hospital_delete' hospital.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
